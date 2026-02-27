@@ -3,17 +3,17 @@ package modelos;
 import java.util.Scanner;
 
 public class Empresa {
-    private String nit;
+    private int nit;
     private String nombre;
     private String direccion;
     private String ciudad;
 
 
     // getters y setters
-    public String getNit() {
+    public int getNit() {
         return nit;
     }
-    public void setNit(String nit) {
+    public void setNit(int nit) {
         this.nit = nit;
     }
     public String getNombre() {
@@ -36,11 +36,20 @@ public class Empresa {
     }
 
     // constructor
-    /*public Empresa(String nit, String nombre, String direccion, String ciudad) {
+    public Empresa(int nit, String nombre, String direccion, String ciudad) {
         this.nit = nit;
         this.nombre = nombre;
         this.direccion = direccion;
-        this.ciudad = ciudad;*/
+        this.ciudad = ciudad;
+    }
+
+    // constructor vacío
+    public Empresa() {
+        this.nit = 0;
+        this.nombre = "";
+        this.direccion = "";
+        this.ciudad = "";
+    }
 
     //metodo ingresar empresa
     // Método para ingresar datos por consola
@@ -48,7 +57,8 @@ public class Empresa {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Ingrese NIT: ");
-        this.nit = sc.nextLine();
+        this.nit = sc.nextInt();
+        sc.nextLine(); // limpiar buffer
 
         System.out.print("Ingrese Nombre: ");
         this.nombre = sc.nextLine();
@@ -58,16 +68,18 @@ public class Empresa {
 
         System.out.print("Ingrese Ciudad: ");
         this.ciudad = sc.nextLine();
+        
+        sc.close(); // Cerrar el Scanner para evitar fugas de recursos
     }
 
     @Override
     public String toString() {
-        return "Empresa [NIT=" + nit + ", Nombre=" + nombre +
-               ", Dirección=" + direccion + ", Ciudad=" + ciudad + "]";
+        return "NIT: " + nit + " | Nombre: " + nombre +
+               " | Dirección: " + direccion + " | Ciudad: " + ciudad;
     }
 
 
-    }
+}
 
 
     

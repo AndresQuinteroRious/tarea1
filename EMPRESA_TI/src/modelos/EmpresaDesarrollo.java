@@ -1,5 +1,5 @@
 package modelos;
 
-public class EmpresaDesarrollo extends Empresa{} {
+public class EmpresaDesarrollo extends Empresa {
 
 }

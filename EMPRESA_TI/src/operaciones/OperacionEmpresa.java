@@ -13,7 +13,15 @@ public class OperacionEmpresa implements IOperacionEmpresa {
 	}
 
 	@Override
-	public Empresa registrarEmpresa(String nit, String nombre, String direccion, String ciudad) {
+	public Empresa registrarEmpresa(int nit, String nombre, String direccion, String ciudad) {
+		// Verificar si ya existe una empresa con el mismo NIT
+		for (Empresa empresa : empresas) {
+			if (empresa.getNit() == nit) {
+				System.out.println(" Ya existe una empresa con el NIT: " + nit);
+				return null;
+			}
+		}
+		
 		Empresa empresa = new Empresa(nit, nombre, direccion, ciudad);
 		empresas.add(empresa);
 		return empresa;
