@@ -52,6 +52,50 @@ Raíz del módulo: `EMPRESA_TI/`
   - `calcularSueldoEmpleado(int documento, int horasTrabajadas)` : devuelve sueldo calculado o 0 si no existe.
   - `contarEmpleadosPorEmpresa(int nitEmpresa)` : cuenta empleados por NIT.
 
+## Aplicación de los 4 pilares (POO)
+
+A continuación explico cómo y dónde se aplican los cuatro pilares de la Programación Orientada a Objetos en este proyecto, con referencias a archivos concretos.
+
+1) Encapsulación
+
+- Dónde: `src/modelos/Empresa.java` y `src/modelos/Empleado.java`.
+- Cómo: los atributos privados (`private int nit`, `private String nombre`, `private int documento`, `private double sueldoHora`, etc.) sólo son accesibles mediante métodos públicos `get`/`set`.
+- Por qué importa: protege el estado interno de los objetos y centraliza validaciones futuras en los métodos accesores.
+- Ejemplo: `Empresa.getNit()` / `Empresa.setNit(int)` y `Empleado.getDocumento()` / `Empleado.setSueldoHora(double)`.
+
+2) Abstracción
+
+- Dónde: `src/operaciones/OperacionEmpresa.java` y `src/operaciones/OperacionEmpleado.java` (y sus interfaces `IOperacionEmpresa.java`, `IOperacionEmpleado.java`).
+- Cómo: las clases `Operacion*` exponen métodos claros (registrar, listar, buscar, calcular) que ocultan la implementación (listas en memoria, verificación de duplicados).
+- Por qué importa: los usuarios del código (por ejemplo `App.java`) no necesitan conocer cómo se guardan o buscan los datos; sólo usan las operaciones públicas.
+- Ejemplo: `operacionEmpleado.registrarEmpleado(...)` devuelve un `Empleado` o `null` sin exponer la lista interna.
+
+3) Herencia
+
+- Dónde: `src/modelos/Empleado.java` usa `extends Empresa`.
+- Cómo: `Empleado` hereda atributos y métodos de `Empresa` (nit, nombre, dirección, ciudad) y añade propios (documento, sueldoHora). `Empleado` llama al constructor `super(...)` para inicializar la parte heredada.
+- Por qué importa: evita duplicar código entre entidad empresa y empleado, y modela una relación IS-A cuando tiene sentido en este diseño (en este caso se reusa la información de la empresa en el empleado).
+- Ejemplo: en `Empleado`:
+  - Constructor: `public Empleado(int nit, String nombreEmpresa, String direccion, String ciudad, int documento, String nombreEmpleado, double sueldoHora) { super(nit, nombreEmpresa, direccion, ciudad); ... }`
+
+4) Polimorfismo
+
+- Dónde: combinación de "método sobrescrito" en `Empleado` y uso de interfaces en `operaciones`.
+- Cómo:
+  - Sobrescritura (runtime polymorphism): `Empleado` sobrescribe métodos de `Empresa` como `getNombre()`/`setNombre()` y `toString()`, permitiendo que una referencia a `Empresa` pueda comportarse como `Empleado` en tiempo de ejecución si se diera el caso.
+  - Interfaces (contratos): `IOperacionEmpresa` y `IOperacionEmpleado` definen contratos que pueden ser implementados por distintas clases; esto permite intercambiar implementaciones sin cambiar el código que usa la interfaz.
+- Por qué importa: facilita extender el comportamiento (por ejemplo, otra implementación de `IOperacionEmpleado` que persista en archivo o BD) y tratar objetos de manera uniforme.
+- Ejemplo práctico sugerido (mejora): cambiar en `App` la declaración a la interfaz para aprovechar polimorfismo:
+
+```java
+// actualmente (concretos):
+OperacionEmpresa operacionEmpresa = new OperacionEmpresa();
+// sugerido (polimorfismo por interfaz):
+IOperacionEmpresa operacionEmpresa = new OperacionEmpresa();
+```
+
+Esto permitiría sustituir `OperacionEmpresa` por otra implementación sin cambiar el resto de `App`.
+
 ## Flujo de ejecución (menú)
 
 Al ejecutar `App`, se presenta el siguiente menú:
