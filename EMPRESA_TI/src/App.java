@@ -65,7 +65,7 @@ public class App {
                     case 3 -> {
                         System.out.println("\n--- CREAR EMPLEADO ---");
                         Empleado empleado = new Empleado();
-                        empleado.crearEmpleado();
+                        empleado.crearEmpleado(sc);
                         
                         Empleado nuevoEmpleado = operacionEmpleado.registrarEmpleado(
                             empleado.getNit(), 

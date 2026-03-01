@@ -69,7 +69,7 @@ public class Empresa {
         System.out.print("Ingrese Ciudad: ");
         this.ciudad = sc.nextLine();
         
-        sc.close(); // Cerrar el Scanner para evitar fugas de recursos
+    // No cerrar el Scanner que envuelve System.in aquí para evitar cerrar System.in
     }
 
     @Override

@@ -138,7 +138,7 @@ Notas:
 3. Selecciona 3 y crea un empleado asociado al NIT 12345 (documento 555, sueldo/hora 10.0).
 4. Selecciona 6, ingresa documento 555 y horas trabajadas 40. Deberías ver sueldo $400.0.
 
-## Casos borde y consideraciones
+## Casos limite y consideraciones
 
 - Las listas de empresas y empleados se mantienen en memoria (ArrayList). Los datos se pierden al terminar el programa.
 - `OperacionEmpresa.registrarEmpresa` y `OperacionEmpleado.registrarEmpleado` hacen comprobaciones básicas (NIT/documento duplicado) y devuelven `null` si ya existe.

@@ -42,40 +42,37 @@ public class Empleado extends Empresa {
         super(0, "", "", "");
     }
 
-    // método para crear empleado por consola
-    public void crearEmpleado() {
-        try (Scanner sc = new Scanner(System.in)) {
-        
+    // método para crear empleado por consola - usa el Scanner proporcionado por quien llama
+    public void crearEmpleado(Scanner sc) {
         System.out.println("=== Crear Empleado ===");
-        
+
         System.out.print("Ingrese NIT de la empresa: ");
         int nit = sc.nextInt();
         sc.nextLine(); // limpiar buffer
         setNit(nit);
-        
+
         System.out.print("Ingrese nombre de la empresa: ");
         String nombreEmpresa = sc.nextLine();
         setNombre(nombreEmpresa);
-        
+
         System.out.print("Ingrese dirección de la empresa: ");
         String direccion = sc.nextLine();
         setDireccion(direccion);
-        
+
         System.out.print("Ingrese ciudad de la empresa: ");
         String ciudad = sc.nextLine();
         setCiudad(ciudad);
-        
+
         System.out.print("Ingrese documento del empleado: ");
         this.documento = sc.nextInt();
         sc.nextLine(); // limpiar buffer
-        
+
         System.out.print("Ingrese nombre del empleado: ");
         this.nombre = sc.nextLine();
-        
+
         System.out.print("Ingrese sueldo por hora: ");
         this.sueldoHora = sc.nextDouble();
         sc.nextLine(); // limpiar buffer
-        } // scanner automatically closed here
     }
 
     @Override
